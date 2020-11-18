@@ -1,3 +1,18 @@
 *{
 font-size: 20px;
 }
+.sticky2{
+    width: 100%;
+    height: 1000px;     /*sticky가 적용될 범위*/
+}
+.sticky{
+    position: sticky;
+    top: 30px;
+    width: 100%;
+    height: 50px;
+}
+li{
+    list-style: none;
+    float: left;
+    margin-right: 6%;
+}

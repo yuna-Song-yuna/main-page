@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <style>
 </style>
 
@@ -17,7 +21,7 @@
             <ul>
                 <li style="margin-right: 80%; margin-left: 3%;">Farming</li>
                 <li></li>
-                <li><a href="http://localhost:2000/login">Log in</a></li>
+                <li><a class="glyphicon glyphicon-user" href="http://localhost:2000/login">Log in</a></li>
                 <li></li>
             </ul>
         </div>
@@ -37,8 +41,18 @@
             </ul>
     </div>
 
-    <div style="padding-top: 2%;">
-        <input type="search" style="border-radius: 30px; width: 30%;">
+    <div class="col-md-8; text-center">
+    <div class="dropdown" style="display: inline-block;">
+        <button class="dropdown-toggle" id="category" type="button" data-toggle="dropdown">카테고리<span class="caret"></span></button>
+        <div class="dropdown-menu" role="menu">
+            <a class=dropdown-item>sdf</a>
+        </div>
+    </div>
+
+    
+    <div style="padding-top: 2%; text-align: center;display: inline-block; width: 70%;">
+        <input type="search" style="border-radius: 30px; width: 30%; width: 40%; margin-left: -10%;">
+    </div>
     </div>
 
     <div align="center" style="margin-top: 2%;">

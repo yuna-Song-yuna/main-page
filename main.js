@@ -10,8 +10,14 @@ var naverstrategy = require("passport-naver").Strategy;
 app.set("view engine", "ejs");
 app.engine("ejs", ejs.renderFile);
 app.use(express.static(__dirname+'/public'))    //__dirname 빼먹어서 기본경로가 설정 안됐어 ==> css파일 경로도 못찾았던 원인
+app.use(session({
+    secret: 'abcde',
+    resave: false,
+    saveUninitialized: true
+}))
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 let conn_info = {
     host : 'localhost',
@@ -38,11 +44,28 @@ passport.use(new kakaostrategy(kakaoKey, (accessToken, refreshToken, profile, do
     console.log(profile);
     console.log(accessToken);
     console.log(refreshToken);
-}))
+    var user = {
+        id: profile.id
+    }
+    console.log(user)
+    let conn = mysql.createConnection(conn_info);
+    conn.query('select id from guest_kakao where id=?',profile.id,(err, result)=>{
+        if(result.length == 0){
+            conn.query('insert into guest_kakao values (?)',profile.id, (err)=>{
+                console.log(err)
+            })
+        }
+
+    return done(null, user)
+
+    })
+    })
+)
 
 passport.use(new naverstrategy(naverKey, (accessToken, refreshToken, profile, done)=>{
     process.nextTick(function(){
         var user = {
+            id: profile._json.id,
             name: profile.name,
             email: profile.emails[0].value,
             username: profile.displayName,
@@ -66,7 +89,14 @@ passport.use(new naverstrategy(naverKey, (accessToken, refreshToken, profile, do
 
 //naver api 쓰는데 failed to serialize user into session 에러 발생해서 추가했음
 passport.serializeUser(function(user, done){
+    done(null, user.id)
+    console.log('serializeUser session:'+user.id)
+})
+
+passport.deserializeUser(function(req, user, done){
+    req.session.id = user.id;
     done(null, user)
+    console.log('deserializeUser session:'+req.session.id)
 })
 
 var router1 = require('./router1')(app, passport)

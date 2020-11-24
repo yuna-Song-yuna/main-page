@@ -14,15 +14,45 @@
 <style>
 </style>
 
+<script>
+    // var log_btn = document.getElementsByName('login');
+    // if(req.user){
+    //     document.getElementsByName('login').hide()
+    //     document.getElementsByName('logout').show()
+    // }else{
+    //     document.getElementsByName('login').show()
+    //     document.getElementsByName('logout').hide()
+    // }
+
+
+    // $(document).ready(function(){
+    //     if(req.user){
+    //         $("#login").hide()
+    //         $("#logout").show()
+    //     }else{
+    //         $("#login").show()
+    //         $("#logout").hide()
+    //     }
+    // })
+
+
+</script>
+
 </head>
 <body style="background-color: antiquewhite;">
     <header>
         <div style="padding-top: 2%;">
             <ul>
-                <li style="margin-right: 70%; margin-left: 3%;">Farming</li>
+                <li style="margin-right: 55%; margin-left: 3%;">Farming</li>
                 <li></li>
-                <li><a class="glyphicon glyphicon-user" href="http://localhost:2000/login">Log in</a></li>
-                <li></li>
+                <li>
+                    <% if(session){ %>
+                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/logout">Log out</a>
+                    <% }else{ %>
+                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/login">Log in</a>
+                    <% } %>
+                </li>                
+                <li><a href="http://localhost:2000/mypage">mypage</a></li>
             </ul>
         </div>
 

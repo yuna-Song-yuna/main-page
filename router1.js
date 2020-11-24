@@ -1,4 +1,7 @@
-const mysql = require("mysql2")
+const mysql = require("mysql2");
+var cookie = require("cookie-parser");
+var session = require("express-session");
+const { authenticate } = require("passport");
 const request = require("request");
 let conn_info = {
     host : 'localhost',
@@ -10,7 +13,16 @@ let conn_info = {
 
 module.exports = function(app, passport){
     app.get('/',function(req, res){
-        res.render('index.ejs')
+        // console.log('req.user:',req.user)
+        // var login_session = req.user
+        // console.log('loginsession:',login_session)
+        // var login_session = {
+        //     session : req.session.id
+        // }
+        console.log('passport.user:',req.session.passport)
+        console.log('session:',req.session)
+        res.render('index.ejs', {session:req.session.passport})
+        // res.render('index.ejs', login_session)
     })
     
     app.get('/login', function(req, res){
@@ -32,4 +44,24 @@ module.exports = function(app, passport){
         failureRedirect: '/login'
     }));
 
+    app.get('/mypage', function(req, res){
+        if(!req.user){
+            res.render('login.ejs')
+        }else{
+            res.render('mypage.ejs')
+        }
+           
+    })
+
+    app.get('/logout', function(req, res){
+        req.logout();
+        res.redirect('/');
+
+        // req.session.destroy(function(){
+            // res.clearCookie('connect.sid');
+            // req.session;
+            // });
+        // req.session.save(function(){
+        // })
+    })
 }

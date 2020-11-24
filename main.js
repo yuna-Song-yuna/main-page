@@ -4,6 +4,7 @@ var ejs = require("ejs")
 var mysql = require("mysql2")
 var passport = require("passport");
 var session = require("express-session");
+var cookie = require("cookie-parser");
 var kakaostrategy = require("passport-kakao").Strategy;
 var naverstrategy = require("passport-naver").Strategy;
 
@@ -73,7 +74,7 @@ passport.use(new naverstrategy(naverKey, (accessToken, refreshToken, profile, do
             naver: profile._json
         }
         console.log("user:",user)
-        return done(null, user)
+        return done(null, user)     //done 호출 시 두번째 인자(user)가 serializeUse로 전달
     })
     let conn = mysql.createConnection(conn_info)
     conn.query('select id from guest_naver where id=?',profile._json.id,(err, result)=>{
@@ -94,9 +95,10 @@ passport.serializeUser(function(user, done){
 })
 
 passport.deserializeUser(function(req, user, done){
-    req.session.id = user.id;
     done(null, user)
-    console.log('deserializeUser session:'+req.session.id)
+    console.log('deserializeUser:',req.session)
+    console.log('req.user:',req.user)   //req.user가 있는 경우 소셜로그인에 성공한 것
+    console.log('deserializeUser session id:'+req.session.id)
 })
 
 var router1 = require('./router1')(app, passport)

@@ -13,16 +13,9 @@ let conn_info = {
 
 module.exports = function(app, passport){
     app.get('/',function(req, res){
-        // console.log('req.user:',req.user)
-        // var login_session = req.user
-        // console.log('loginsession:',login_session)
-        // var login_session = {
-        //     session : req.session.id
-        // }
         console.log('passport.user:',req.session.passport)
         console.log('session:',req.session)
         res.render('index.ejs', {session:req.session.passport})
-        // res.render('index.ejs', login_session)
     })
     
     app.get('/login', function(req, res){
@@ -56,12 +49,5 @@ module.exports = function(app, passport){
     app.get('/logout', function(req, res){
         req.logout();
         res.redirect('/');
-
-        // req.session.destroy(function(){
-            // res.clearCookie('connect.sid');
-            // req.session;
-            // });
-        // req.session.save(function(){
-        // })
     })
 }

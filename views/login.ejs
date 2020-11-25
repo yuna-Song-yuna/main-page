@@ -5,26 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        a{
+            color: black;
+        }
+        a:hover{
+            text-decoration: none;
+            color: black;
+        }
+        input{
+            border-radius: 5px;
+            border: 1px black solid;
+        }
+    </style>
 
 </head>
 <body>
     <header>
-        <%- include('header') %>
+        <%#- include('header') %>
+        <header>
+            <div style="padding-top: 2%;">
+                <ul>
+                    <li style="margin-left: 3%;"><a href="http://localhost:2000">Farming</a></li>
+                    <li></li>
+                    <li style="float: right;"><a class="glyphicon glyphicon-user" href="http://localhost:2000/login">Log in</a></li>
+                </ul>
+            </div>
+    
+            </br>
+    
+        </header>
+    
     </header>
-    Login to ~~<br>
-    <div>
-        ID <input type="text"> <br>
-        PASSWORD <input type="password"> <br>
-        <button type="submit">continue</button>
-        <button type="button">Sign Up</button>
-    </div>
+    <div class="container; text-center">
+        <br>
+        <p>Login to ~~</p>
+        <br>
+        <div class="col-md-3">3</div>
 
+        <div class="form-horizontal col-md-6 text-center">
+            <div class="form-group">
+                <div class="col-md-4">ID</div>
+                <input class="col-md-8" type="text">
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">PASSWORD</div>
+                <input class="col-md-8" type="password">
+            </div>
+            <div class="form-group">
+            <button type="submit">continue</button>
+            <button type="button">Sign Up</button>
+            </div>
 
-    <div>
-        <a href="/login/kakao"><div>카카오톡으로 로그인</div></a>
-    </div>
-    <div>
-        <a href="/login/naver"><div>네이버로 로그인</div></a>
+            <div class="form-group">
+                <a href="/login/kakao" class="col-md-12"><img src="/image/kakao_login.png"></a>
+                <a href="/login/naver" class="col-md-12"><img src="/image/naver_login.png" style="width: 300px; height: 45px;"></a>
+            </div>
+        </div>
+
+        <div class="col-md-3">3</div>
+
     </div>
 </body>
 </html>

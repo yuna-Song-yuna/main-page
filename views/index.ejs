@@ -14,93 +14,55 @@
 <style>
 </style>
 
-<script>
-    // var log_btn = document.getElementsByName('login');
-    // if(req.user){
-    //     document.getElementsByName('login').hide()
-    //     document.getElementsByName('logout').show()
-    // }else{
-    //     document.getElementsByName('login').show()
-    //     document.getElementsByName('logout').hide()
-    // }
-
-
-    // $(document).ready(function(){
-    //     if(req.user){
-    //         $("#login").hide()
-    //         $("#logout").show()
-    //     }else{
-    //         $("#login").show()
-    //         $("#logout").hide()
-    //     }
-    // })
-
-
-</script>
 
 </head>
-<body style="background-color: antiquewhite;">
+<body>
     <header>
-        <div style="padding-top: 2%;">
-            <ul>
-                <li style="margin-right: 55%; margin-left: 3%;">Farming</li>
-                <li></li>
-                <li>
-                    <% if(session){ %>
-                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/logout">Log out</a>
-                    <% }else{ %>
-                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/login">Log in</a>
-                    <% } %>
-                </li>                
-                <li><a href="http://localhost:2000/mypage">mypage</a></li>
-            </ul>
-        </div>
-
-        </br>
+        <%- include('header') %>
     </header>
-
     <main>
-    <div class="sticky2">
+    <div class="sticky2" style=" padding-top: -5%;">
 
-        <div style="margin:auto; background-color: salmon;" class="sticky">
-            <ul style="text-align: center;margin-left:auto; margin-right: auto; width:50% ">
+        <div style="margin:auto; background-color: black;" class="sticky">
+            <ul style="text-align: center;margin-left:auto; margin-right: auto; width:50%; color:white">
                 <li style="margin-right: 7%; margin-left: 7%;">Home</li>
                 <li style="margin-right: 7%; margin-left: 7%;">Shop</li>
                 <li style="margin-right: 7%; margin-left: 7%;">About</li>
                 <li style="margin-right: 7%; margin-left: 7%;">Contact</li>
             </ul>
-    </div>
-
-    <div class="col-md-8; text-center">
-    <div class="dropdown" style="display: inline-block;">
-        <button class="dropdown-toggle" id="category" type="button" data-toggle="dropdown">카테고리<span class="caret"></span></button>
-        <div class="dropdown-menu" role="menu">
-            <a class=dropdown-item>sdf</a>
         </div>
-    </div>
 
-    
-    <div style="padding-top: 2%; text-align: center;display: inline-block; width: 70%;">
-        <input type="search" style="border-radius: 30px; width: 30%; width: 40%; margin-left: -10%;">
-    </div>
-    </div>
+        <div class="col-md-8; text-center">     
+            <div class="dropdown" style="display: inline-block;">
+                <button class="dropdown-toggle" id="category" type="button" data-toggle="dropdown">카테고리<span class="caret"></span></button>
+                <div class="dropdown-menu" role="menu">
+                    <a class=dropdown-item>sdf</a>
+                </div>
+            </div>
 
-    <div align="center" style="margin-top: 2%;">
-        <img src="/image/main_image.png">
-    </div>
+            
+            <div style="padding-top: 2%; text-align: center;display: inline-block; width: 70%;">
+                <input type="search" style="border-radius: 30px; width: 30%; width: 40%; margin-left: -10%; border: 1px solid black;">
+                <a class="glyphicon glyphicon-search"></a>
+            </div>
+        </div>
+
+        <div align="center" style="margin-top: 2%; width: 100%; height: 600px;">
+            <img src="/image/main_image2.png" style="width: 100%; height: 100%;">
+        </div>
 
 
 
-    <%# for(var i=0; i<16; i++){ %>
-        <%# if(typeof result[i]=="undefined"){ %>
-            <div class="img_section">no product</div>
+        <%# for(var i=0; i<16; i++){ %>
+            <%# if(typeof result[i]=="undefined"){ %>
+                <div class="img_section">no product</div>
+            <%# } %>
         <%# } %>
-    <%# } %>
 
-    <% for(var i=0; i<30; i++){ %>
-        i<br>
-    <% } %>
-</div>
+        <% for(var i=0; i<30; i++){ %>
+            i<br>
+        <% } %>
+    </div>
 
     </main>
 </body>

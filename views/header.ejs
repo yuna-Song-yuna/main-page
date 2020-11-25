@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
-
-    <header>
+    <div class="container-fluid">
         <div style="padding-top: 2%;">
             <ul>
-                <li style="margin-right: 80%; margin-left: 3%;">Farming</li>
-                <li></li>
-                <li><a class="glyphicon glyphicon-user" href="http://localhost:2000/login">Log in</a></li>
-                <li>mypage</li>
+                <li style="margin-left: 3%;">Farming</li>
+                <li style="float: right;"><a href="http://localhost:2000/mypage" class="glyphicon glyphicon-heart">mypage</a></li>
+                <li style="float: right;">
+                    <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
+                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/login">LogIn</a>
+                    <% }else{ %>
+                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/logout">LogOut</a>
+                    <% } %>
+                </li>                
+
+                <li style="float:right">
+                    <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
+                        Welcome!
+                        <% }else{ %>
+                        Welcome! <%=session.user%>님!
+                        <% } %>
+
+                </li>
             </ul>
         </div>
-
+    </div>
         </br>
-
-    </header>
 
 </body>
 </html>

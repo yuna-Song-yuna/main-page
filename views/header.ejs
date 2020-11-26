@@ -6,31 +6,35 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css">
 
+    <style>
+        #header_css{
+            height: 50px;
+            line-height: 80px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div style="padding-top: 2%;">
-            <ul>
-                <li style="margin-left: 3%;">Farming</li>
-                <li style="float: right;"><a href="http://localhost:2000/mypage" class="glyphicon glyphicon-heart">mypage</a></li>
-                <li style="float: right;">
-                    <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
-                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/login">LogIn</a>
+    <div class="container-fluid" id="header_css">
+        <ul>
+            <li style="margin-left: 3%;"><a href="http://localhost:2000">농부야</a></li>
+            <li style="float: right;"><a href="http://localhost:2000/mypage" class="glyphicon glyphicon-heart">mypage</a></li>
+            <li style="float: right;">
+                <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
+                    <a class="glyphicon glyphicon-user" href="http://localhost:2000/login">LogIn</a>
+                <% }else{ %>
+                    <a class="glyphicon glyphicon-user" href="http://localhost:2000/logout">LogOut</a>
+                <% } %>
+            </li>                
+
+            <li style="float:right">
+                <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
+                    Welcome!
                     <% }else{ %>
-                        <a class="glyphicon glyphicon-user" href="http://localhost:2000/logout">LogOut</a>
+                    Welcome! <%=session.user%>님!
                     <% } %>
-                </li>                
 
-                <li style="float:right">
-                    <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
-                        Welcome!
-                        <% }else{ %>
-                        Welcome! <%=session.user%>님!
-                        <% } %>
-
-                </li>
+            </li>
             </ul>
-        </div>
     </div>
         </br>
 

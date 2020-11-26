@@ -11,6 +11,10 @@ let conn_info = {
     database : 'product'
 }
 
+//session 출력 형태
+//req.user: id값
+//req.session.passport: {user:id값} 
+
 module.exports = function(app, passport){
     app.get('/',function(req, res){
         console.log('passport.user:',req.session.passport)
@@ -41,9 +45,16 @@ module.exports = function(app, passport){
         if(!req.user){
             res.render('login.ejs')
         }else{
-            res.render('mypage.ejs')
+            let conn=mysql.createConnection(conn_info);
+            conn.query('select id,role from guest_kakao where id=? union all select id,role from guest_naver where id=?',[req.user,req.user],(err, result)=>{
+                console.log(err)
+                if(result[0].role == 'buyer'){
+                    res.render('mypage_buyer.ejs',{session:req.session.passport})
+                }else{
+                    res.render('mypage_seller.ejs',{session:req.session.passport})
+                }
+            })
         }
-           
     })
 
     app.get('/logout', function(req, res){

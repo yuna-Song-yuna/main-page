@@ -5,11 +5,23 @@ var mysql = require("mysql2")
 var passport = require("passport");
 var session = require("express-session");
 var cookie = require("cookie-parser");
+var bodyParser = require("body-parser");
+var multer = require('multer')
+var fileupload = require("express-fileupload");
 var kakaostrategy = require("passport-kakao").Strategy;
 var naverstrategy = require("passport-naver").Strategy;
 
 app.set("view engine", "ejs");
 app.engine("ejs", ejs.renderFile);
+app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(express.json());
+app.use(fileupload({
+    createParentPath : true
+}));
 app.use(express.static(__dirname+'/public'))    //__dirname 빼먹어서 기본경로가 설정 안됐어 ==> css파일 경로도 못찾았던 원인
 app.use(session({
     secret: 'abcde',
@@ -18,7 +30,6 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 let conn_info = {
     host : 'localhost',

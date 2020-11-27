@@ -3,6 +3,10 @@ var cookie = require("cookie-parser");
 var session = require("express-session");
 const { authenticate } = require("passport");
 const request = require("request");
+var bodyParser = require("body-parser")
+var parser = bodyParser.urlencoded({extended:false});
+var fileupload = require("express-fileupload");
+
 let conn_info = {
     host : 'localhost',
     port : 3320,
@@ -60,5 +64,35 @@ module.exports = function(app, passport){
     app.get('/logout', function(req, res){
         req.logout();
         res.redirect('/');
+    })
+
+    app.get('/regi_item', function(req, res){
+        if(!req.user){
+            res.render('index.ejs')
+        }
+        res.render('regi_item.ejs',{session:req.session.passport})
+    })
+
+    app.post('/regi_item_ing',parser, function(req, res){
+        let sell_image = req.files.sell_image;
+        let content_image = req.files.content_image;
+
+        console.log('req.files.sell_image:',req.files.sell_image)
+        if(!req.files.sell_image && !req.files.content_image){
+            res.redirect('/')
+        }else if(!req.files.sell_image){
+            content_image.mv(__dirname+'/public/image/uploads/'+content_image.name)
+            res.redirect('/')  
+        }else if(!req.files.content_image){
+            sell_image.mv(__dirname+'/public/image/uploads/'+sell_image.name)
+            res.redirect('/')
+        }else{
+            sell_image.mv(__dirname+'/public/image/uploads/'+sell_image.name)
+            content_image.mv(__dirname+'/public/image/uploads/'+content_image.name)  
+            res.redirect('/')  
+        }
+        
+        console.log(req.body)
+        console.log(req.files)
     })
 }

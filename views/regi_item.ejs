@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
-
+    <script src="js/action.js"></script>
 </head>
 <body>
     <header>
@@ -13,8 +13,69 @@
     </header>
 
     <main>
-        물품등록하기
-        
+        <span>물품등록</span>
+    <form method="POST" action="/regi_item_ing" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <div class="col-md-2">2</div>
+
+            <div class="col-md-8">
+                <div class="col-md-4">
+                    <div id='thumbnail_image'></div>
+                    <input type="file" name="sell_image" accept="image/*" onchange="thumbnail(this);">
+                </div>
+
+                <div class="col-md-8 form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3">제목:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="title" style="width: 90%;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3">가격:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="price" style="width: 90%;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3">카테고리:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="category" style="width: 90%;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3">배송시작가능일:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="start_date" style="width: 90%;">
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+
+            <div class="col-md-2">2</div>
+
+            <div class="col-md-8">
+                <p>CONTENT</p>
+                <div class="col-md-8">
+                    <label class="col-md-3">텍스트로 입력:</label>
+                    <div class="col-md-9">
+                        <input type="text" name="content_text" style="width: 90%;">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="file" name="content_image" accept="image/*" onchange="content_thumbnail(this);">
+                    <div id='content_image2'></div>
+                </div>
+
+                <div class="col-md-8 col-md-offset-10">
+                    <button type="submit" class="btn">판매등록</button>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
     </main>
 </body>
 </html>

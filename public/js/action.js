@@ -19,3 +19,9 @@ function content_thumbnail(f){      //function이름이랑 id랑 같으면 in no
     reader.readAsDataURL(file[0]);
 }
 
+// $(function(){
+//     $('#start_date').datepicker();
+// })
+// $('#start_date').datepicker({
+//     language: 'ko'
+// })

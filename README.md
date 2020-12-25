@@ -4,7 +4,7 @@
 Node.js   
 MySQL   
 
-## Install
+## Installation
 `npm install express --save`   
 `npm install passport --save`   
 `npm install express-fileupload --save`   

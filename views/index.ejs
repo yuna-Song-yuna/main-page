@@ -56,16 +56,22 @@
         </div>
 
 
+        <div class="col-md-8; text-center">
+            <% for(var i=0; i<20; i++){ %>
+                <% if(result[i]){ %>
+                    <div class="col-md-3" style="height: 300px; overflow: hidden;">
+                        <%= result[i].title %> <br>
+                        <img src="image/uploads/<%= result[i].thumbnail_image %> " alt="등록된 이미지가 없습니다" style="width: 100%;"> <br>
+                        <%= result[i].price %> <br>
+                    </div>
+                <% }else{ %>
+                    <div class="col-md-3" style="height: 300px;">
+                        등록된 물품이 없습니다.<br>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
 
-        <%# for(var i=0; i<16; i++){ %>
-            <%# if(typeof result[i]=="undefined"){ %>
-                <div class="img_section">no product</div>
-            <%# } %>
-        <%# } %>
-
-        <% for(var i=0; i<30; i++){ %>
-            i<br>
-        <% } %>
     </div>
 
     </main>

@@ -3,7 +3,7 @@ font-size: 20px;
 }
 .sticky2{       /*sticky 부모 div*/
     width: 100%;
-    height: 1000px;     /*sticky가 적용될 범위*/
+    height: 100%;     /*sticky가 적용될 범위*/
 }
 .sticky{        /*sticky div*/
     position: sticky;

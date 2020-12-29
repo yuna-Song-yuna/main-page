@@ -30,7 +30,11 @@
                 <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
                     Welcome!
                     <% }else{ %>
-                    Welcome! <%=session.user%>님!
+                        <% if(result1[0].connect == 'naver'){ %>
+                            <img src="/image/naver.png" style="width: 50px;"> <%= session.user %>
+                        <% }else{ %>
+                            <img src="/image/kakao.png" style="width: 50px;"> <%= session.user %>
+                        <% } %>
                     <% } %>
 
             </li>

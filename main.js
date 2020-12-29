@@ -61,9 +61,9 @@ passport.use(new kakaostrategy(kakaoKey, (accessToken, refreshToken, profile, do
     }
     console.log(user)
     let conn = mysql.createConnection(conn_info);
-    conn.query('select id from guest_kakao where id=?',profile.id,(err, result)=>{
+    conn.query('select id from guest where id=?',profile.id,(err, result)=>{
         if(result.length == 0){
-            conn.query('insert into guest_kakao values (?)',profile.id, (err)=>{
+            conn.query('insert into guest (id, connect) values (?,?)',[profile.id, 'kakao'], (err)=>{
                 console.log(err)
             })
         }
@@ -88,10 +88,10 @@ passport.use(new naverstrategy(naverKey, (accessToken, refreshToken, profile, do
         return done(null, user)     //done 호출 시 두번째 인자(user)가 serializeUse로 전달
     })
     let conn = mysql.createConnection(conn_info)
-    conn.query('select id from guest_naver where id=?',profile._json.id,(err, result)=>{
+    conn.query('select id from guest where id=?',profile._json.id,(err, result)=>{
         if(result.length == 0){
-            let sql = 'insert into guest_naver values (?,?,?,?,?)'
-            let val = [profile._json.id,profile.emails[0].value,profile._json.age,profile._json.name,profile._json.birthday]
+            let sql = 'insert into guest values (?,?,?,?,?,?,?)'
+            let val = [profile._json.id, profile.emails[0].value, profile._json.age, profile._json.name, profile._json.birthday, 'buyer', 'naver']
             conn.query(sql, val, (err)=>{
                 console.log(err)
             })                

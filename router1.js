@@ -27,8 +27,9 @@ module.exports = function(app, passport){
         let conn=mysql.createConnection(conn_info);
         let sql = 'select * from sell_product'
         conn.query(sql, (err, result)=>{
-            console.log('result:',result)
-            res.render('index.ejs', {session:req.session.passport, result})
+            conn.query('select connect from guest where id=?',req.user, (err, result1)=>{
+                res.render('index.ejs', {session:req.session.passport, result, result1})
+            })
         })
     })
     

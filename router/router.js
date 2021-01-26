@@ -1,11 +1,8 @@
 const mysql = require("mysql2");
-var cookie = require("cookie-parser");
-var session = require("express-session");
-const { authenticate } = require("passport");
-const request = require("request");
 var bodyParser = require("body-parser")
 var parser = bodyParser.urlencoded({extended:false});
 var fileupload = require("express-fileupload");
+
 
 let conn_info = {
     host : 'localhost',
@@ -15,62 +12,26 @@ let conn_info = {
     database : 'product'
 }
 
-//session 출력 형태
-//req.user: id값
-//req.session.passport: {user:id값} 
-//id 세션값 : req.session.passport.user
 
-module.exports = function(app, passport){
-    app.get('/',function(req, res){
-        // console.log('passport.user:',req.session.passport)
-        // console.log('session:',req.session)
-        let conn=mysql.createConnection(conn_info);
-        let sql = 'select * from sell_product'
-        conn.query(sql, (err, result)=>{
-            conn.query('select connect from guest where id=?',req.user, (err, result1)=>{
-                res.render('index.ejs', {session:req.session.passport, result, result1})
-            })
-        })
-    })
-    
-    app.get('/login', function(req, res){
-        res.render('login.ejs')
-    })
-    
-    app.get('/login/kakao', passport.authenticate("kakao"))
 
-    app.get('/login/kakao/callback', passport.authenticate('kakao', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-        })
-    )
-
-    app.get('/login/naver', passport.authenticate('naver'))
-
-    app.get('/login/naver/callback', passport.authenticate('naver', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }));
-
+module.exports = function(app){
     app.get('/mypage', function(req, res){
         if(!req.user){
             res.render('login.ejs')
         }else{
             let conn=mysql.createConnection(conn_info);
-            conn.query('select id,role from guest_kakao where id=? union all select id,role from guest_naver where id=?',[req.user,req.user],(err, result)=>{
+            conn.query('select id,role,connect from guest where id=?',[req.user],(err, result_role)=>{
                 console.log(err)
-                if(result[0].role == 'buyer'){
-                    res.render('mypage_buyer.ejs',{session:req.session.passport})
+                if(result_role[0].role == 'buyer'){
+                    console.log('result-role:',result_role)
+                    res.render('mypage_buyer.ejs',{session:req.session.passport, result_role})
                 }else{
-                    res.render('mypage_seller.ejs',{session:req.session.passport})
+                    res.render('mypage_seller.ejs',{session:req.session.passport, result_role})
+                    console.log('result-role:',result_role)
+
                 }
             })
         }
-    })
-
-    app.get('/logout', function(req, res){
-        req.logout();
-        res.redirect('/');
     })
 
     app.get('/regi_item', function(req, res){
@@ -99,6 +60,8 @@ module.exports = function(app, passport){
             let sql = 'insert into sell_product (id, title, price, category, start_date, content_text) values (?,?,?,?,?,?)'
             input_data = [req.session.passport.user, req.body.title, req.body.price, req.body.category, req.body.start_date, req.body.content_text]
             conn.query(sql, input_data, (err, result)=>{
+                console.log(input_data)
+                console.log(err)
                 res.redirect('/')
             })
             console.log('아이디:',req.session.passport.user)
@@ -137,4 +100,6 @@ module.exports = function(app, passport){
         console.log(req.body)
         console.log(req.files)
     })
+
+
 }

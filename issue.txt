@@ -1,0 +1,2 @@
+1. 물품 등록 시 가격(price), 배송일자(start_date 입력 안하면) db에 등록되지 않음(=error)
+    =>javascript로 필요한 항목들 입력 안돼있으면 alert를 띄우든지 db에 null값을 들어가게 하든지 변경필요

@@ -2,6 +2,7 @@ var express = require('express')
 var app = express();
 var ejs = require("ejs")
 var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 var session = require("express-session");
 var cookie = require("cookie-parser");
 var bodyParser = require("body-parser");

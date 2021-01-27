@@ -2,6 +2,7 @@ const mysql = require("mysql2");
 var cookie = require("cookie-parser");
 var session = require("express-session");
 const { authenticate } = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 const request = require("request");
 // var bodyParser = require("body-parser")
 // var parser = bodyParser.urlencoded({extended:false});
@@ -36,6 +37,29 @@ let conn_info = {
 //id 세션값 : req.session.passport.user
 
 module.exports = function(app, passport){
+
+    //local이라는 strategy를 사용한다고 선언해주는 것
+    passport.use(new LocalStrategy({
+        usernameField: 'username',      //form name
+        passwordField: 'password'
+        
+        //passReqToCallback: true
+    }, function(username, password, done){
+        console.log(username)
+        console.log(password)
+        console.log('local-join callback called')
+        let conn = mysql.createConnection(conn_info);
+        conn.query('select id from guest where id=?', username, (err, result)=>{
+            if(result.length >=1){
+                var user = {
+                    id: username
+                }        
+                return done(null, user)     //done(에러, 성공했을 때 값, 사용자정의 메시지) 
+            }else return done(null, false)  //done을 통해 로그인 성공 여부를 판단
+        })
+    }
+    ))
+
     passport.use(new kakaostrategy(kakaoKey, (accessToken, refreshToken, profile, done)=>{
         console.log(profile);
         console.log(accessToken);
@@ -113,6 +137,12 @@ module.exports = function(app, passport){
         res.render('login.ejs')
     })
     
+    app.post('/login/local', passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })
+    )
+
     app.get('/login/kakao', passport.authenticate("kakao"))
 
     app.get('/login/kakao/callback', passport.authenticate('kakao', {

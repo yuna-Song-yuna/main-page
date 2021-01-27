@@ -45,25 +45,26 @@
         <br>
         <div class="col-md-3">3</div>
 
-        <div class="form-horizontal col-md-6 text-center">
-            <div class="form-group">
-                <div class="col-md-4">ID</div>
-                <input class="col-md-8" type="text">
+        <form action="/login/local" method="POST" >
+            <div class="form-horizontal col-md-6 text-center">
+                <div class="form-group">
+                    <div class="col-md-4">ID</div>
+                    <input class="col-md-8" type="text" name="username">
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">PASSWORD</div>
+                    <input class="col-md-8" type="password" name="password">
+                </div>
+                <div class="form-group">
+                <button type="submit" class="btn">continue</button>
+                <button type="button" class="btn">Sign Up</button>
+                </div>
+                <div class="form-group">
+                    <a href="/login/kakao" class="col-md-12"><img src="/image/kakao_login.png"></a>
+                    <a href="/login/naver" class="col-md-12"><img src="/image/naver_login.png" style="width: 300px; height: 45px;"></a>
+                </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-4">PASSWORD</div>
-                <input class="col-md-8" type="password">
-            </div>
-            <div class="form-group">
-            <button type="submit" class="btn">continue</button>
-            <button type="button" class="btn">Sign Up</button>
-            </div>
-
-            <div class="form-group">
-                <a href="/login/kakao" class="col-md-12"><img src="/image/kakao_login.png"></a>
-                <a href="/login/naver" class="col-md-12"><img src="/image/naver_login.png" style="width: 300px; height: 45px;"></a>
-            </div>
-        </div>
+        </form>
 
         <div class="col-md-3">3</div>
 

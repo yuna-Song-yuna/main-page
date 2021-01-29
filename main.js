@@ -31,6 +31,7 @@ app.use(passport.session());
 
 var login = require('./router/login')(app, passport)
 var router = require('./router/router')(app)
+var join = require('./router/join')(app)
 
 
 var server = app.listen(2000, function(){

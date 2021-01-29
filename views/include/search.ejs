@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div class="col-md-8; text-center">     
+        <div class="dropdown" style="display: inline-block;">
+            <button class="dropdown-toggle" id="category" type="button" data-toggle="dropdown">카테고리<span class="caret"></span></button>
+            <div class="dropdown-menu" role="menu">
+                <a class=dropdown-item>과일<br></a>
+                <a class=dropdown-item>채소<br></a>
+                <a class=dropdown-item>곡물<br></a>
+                <a class=dropdown-item>견과<br></a>
+                <a class=dropdown-item>버섯<br></a>
+            </div>
+        </div>
+
+        <form action="/search" method="GET">
+            <div style="padding-top: 2%; text-align: center;display: inline-block; width: 70%;">
+                <input type="search" name="search" style="border-radius: 30px; width: 30%; width: 40%; margin-left: -10%; border: 1px solid black;">
+                <button type="submit"> <a class="glyphicon glyphicon-search"></a></button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

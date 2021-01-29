@@ -2,6 +2,7 @@ const mysql = require("mysql2");
 var bodyParser = require("body-parser")
 var parser = bodyParser.urlencoded({extended:false});
 var fileupload = require("express-fileupload");
+const { createConnection } = require("mysql2/promise");
 
 
 let conn_info = {
@@ -20,15 +21,13 @@ module.exports = function(app){
             res.render('login.ejs')
         }else{
             let conn=mysql.createConnection(conn_info);
-            conn.query('select id,role,connect from guest where id=?',[req.user],(err, result_role)=>{
+            conn.query('select id,role from guest where id=?',[req.user],(err, result)=>{
                 console.log(err)
-                if(result_role[0].role == 'buyer'){
-                    console.log('result-role:',result_role)
-                    res.render('mypage_buyer.ejs',{session:req.session.passport, result_role})
+                if(result[0].role == 'buyer'){
+                    res.render('mypage_buyer.ejs',{session:req.user})
                 }else{
-                    res.render('mypage_seller.ejs',{session:req.session.passport, result_role})
-                    console.log('result-role:',result_role)
-
+                    //res.render('mypage_seller.ejs',{session:req.session.passport})
+                    res.render('mypage_seller.ejs',{session:req.user})
                 }
             })
         }
@@ -42,7 +41,7 @@ module.exports = function(app){
     })
 
     //판매 등록
-    app.post('/regi_item_ing',parser, function(req, res){
+    app.post('/product',parser, function(req, res){
         if(!req.files){     //이미지를 하나라도 전달받으면 등록안한 이미지는 undefined로 전송이 됨 => 에러 안나고 진행
                             //근데 이미지를 둘다 전송 안하면 null로 전송됨 => 에러남
             var sell_image = 'undefined'
@@ -101,5 +100,18 @@ module.exports = function(app){
         console.log(req.files)
     })
 
+    // 상품 검색
+    app.get('/search', function(req, res){
+        //var data = new Set();
+        //var search_data = req.query.search;
+        //search_data = search_data.split(" ")
+        let conn = mysql.createConnection(conn_info)
+        var data = req.query.search
+        data = '%'+data+'%'
+
+        conn.query('select title from sell_product where title like ?', data, (err, result)=>{
+            res.send(result)
+        })
+    })
 
 }

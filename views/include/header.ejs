@@ -17,6 +17,9 @@
     <div class="container-fluid" id="header_css">
         <ul>
             <li style="margin-left: 3%;"><a href="http://localhost:2000">농부야</a></li>
+            <li style="float: right; margin-right: 2%">
+                <%= session %>
+            </li>
             <li style="float: right;"><a href="http://localhost:2000/mypage" class="glyphicon glyphicon-heart">mypage</a></li>
             <li style="float: right;">
                 <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
@@ -25,19 +28,6 @@
                     <a class="glyphicon glyphicon-user" href="http://localhost:2000/logout">LogOut</a>
                 <% } %>
             </li>                
-
-            <li style="float:right">
-                <% if(typeof session == "undefined" || JSON.stringify(session) === JSON.stringify({})){ %>
-                    Welcome!
-                    <% }else{ %>
-                        <% if( result_role[0].connect == 'naver'){ %>
-                            <img src="/image/naver.png" style="width: 50px;"> <%= session.user %>
-                        <% }else{ %>
-                            <img src="/image/kakao.png" style="width: 50px;"> <%= session.user %>
-                        <% } %>
-                    <% } %>
-
-            </li>
             </ul>
     </div>
         </br>

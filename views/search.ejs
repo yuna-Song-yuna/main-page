@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <header>
+        <%- include('include/header') %>
+    </header>
+
+    <h1>검색페이지</h1>
+    
+    <input type="text" id="data" value="" >
+    <button type="submit" onclick="select_product()">검색</button>  <!--onclick()함수를 이용해서 버튼 클릭했을 때 이벤트 발생시킴-->
+
+
+<script>
+    function select_product(){      //onclick 이벤트 발생했을 때 실행
+        var xhttp = new XMLHttpRequest();
+        var data = document.getElementById("data").value;
+        console.log(data)
+    
+        xhttp.onload = function(){
+            if(xhttp.status === 200){
+                console.log(xhttp.responseText)     // responseText 에는 서버로부터 전송받은 데이터가 담겨있음
+                document.getElementById('showResult').innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", '/product/'+data)
+        xhttp.setRequestHeader('Content-type', 'application/json')
+        xhttp.send(data)    //서버에 전달할 정보
+    }
+</script>
+
+    <div id='showResult'>
+        <%= JSON.stringify(result) %> 
+    </div>
+
+
+</body>
+</html>

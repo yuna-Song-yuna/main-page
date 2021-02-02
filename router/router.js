@@ -101,7 +101,7 @@ module.exports = function(app){
     })
 
     // 상품 검색
-    app.get('/search', function(req, res){
+    app.get('/product', function(req, res){
         //var data = new Set();
         //var search_data = req.query.search;
         //search_data = search_data.split(" ")
@@ -110,8 +110,18 @@ module.exports = function(app){
         data = '%'+data+'%'
 
         conn.query('select title from sell_product where title like ?', data, (err, result)=>{
-            res.send(result)
+            res.render('search.ejs', {result})
         })
     })
 
+    // 비동기 상품 검색
+    app.get('/product/:title', function(req, res){
+        var title = req.params.title;
+        title = "%"+title+"%"
+
+        let conn = mysql.createConnection(conn_info)
+        conn.query('select title from sell_product where title like ?',title, (err, result)=>{
+            res.json({session:req.user, result})
+        })
+    })
 }

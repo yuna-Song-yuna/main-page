@@ -23,9 +23,9 @@
             Welcome!
             <% }else{ %>
                 <% if( result_role[0].connect == 'naver'){ %>
-                    <img src="/image/naver.png" style="width: 50px;"> <%= session.user %>
+                    <img src="/image/naver.png" style="width: 50px;"> <%#= session%>
                 <% }else if( result_role[0].connect == 'kakao'){ %>
-                    <img src="/image/kakao.png" style="width: 50px;"> <%= session.user %>
+                    <img src="/image/kakao.png" style="width: 50px;"> <%#= session %>
                 <% } %>
             <% } %>
 

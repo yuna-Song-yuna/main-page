@@ -17,8 +17,10 @@
     <div class="container-fluid" id="header_css">
         <ul>
             <li style="margin-left: 3%;"><a href="http://localhost:2000">농부야</a></li>
-            <li style="float: right; margin-right: 2%">
-                    <%= session %>
+            <li style="float: right; margin-right: 1%">
+                    <% if( session ){ %>
+                        <%= session %>
+                    <% } %>
             </li>
             <li style="float: right;"><a href="http://localhost:2000/mypage" class="glyphicon glyphicon-heart">mypage</a></li>
             <li style="float: right;">

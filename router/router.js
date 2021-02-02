@@ -110,7 +110,7 @@ module.exports = function(app){
         data = '%'+data+'%'
 
         conn.query('select title from sell_product where title like ?', data, (err, result)=>{
-            res.render('search.ejs', {result})
+            res.render('search.ejs', {session:req.user,result})
         })
     })
 
@@ -121,7 +121,7 @@ module.exports = function(app){
 
         let conn = mysql.createConnection(conn_info)
         conn.query('select title from sell_product where title like ?',title, (err, result)=>{
-            res.json({session:req.user, result})
+            res.json(result)
         })
     })
 }
